@@ -7,14 +7,20 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
+// Serve the prebuilt React frontend
+app.use(express.static(path.join(__dirname, "frontend", "build")));
+
+// All other routes return the frontend
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend", "build", "index.html"));
+});
+
+// Multiplayer tag logic
 let players = {};
 let itPlayer = null;
 
-// Serve frontend build
-app.use(express.static(path.join(__dirname, "frontend", "build")));
-
 io.on("connection", (socket) => {
-  console.log("New player:", socket.id);
+  console.log("New player connected:", socket.id);
 
   players[socket.id] = { x: 200, y: 200, isIt: false };
   if (!itPlayer) {
@@ -32,7 +38,7 @@ io.on("connection", (socket) => {
     if (dir === "left") players[socket.id].x -= speed;
     if (dir === "right") players[socket.id].x += speed;
 
-    // Tag check
+    // Check if the "it" player tags someone
     if (players[itPlayer] && socket.id !== itPlayer) {
       const dx = players[itPlayer].x - players[socket.id].x;
       const dy = players[itPlayer].y - players[socket.id].y;
@@ -57,4 +63,8 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(3000, () => console.log("Game server running on port 3000"));
+// Use port from Render or default to 3000
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
