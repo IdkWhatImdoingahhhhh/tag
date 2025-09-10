@@ -1,1 +1,0 @@
-# Tag2 Online Loop\n\nRun `npm install` then `npm start` and open http://localhost:3000\nLobby: press R to ready.
