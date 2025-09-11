@@ -1,0 +1,18 @@
+{
+  "name": "top-kart-top-tier-starter",
+  "version": "1.0.0",
+  "description": "Higher-quality kart racer starter with reliable asset fetch URLs (Khronos glTF sample models).",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "postinstall": "node scripts/fetchAssets.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^4.7.1",
+    "node-fetch": "^3.3.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

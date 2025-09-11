@@ -1,0 +1,6 @@
+
+html,body{height:100%;margin:0;overflow:hidden;background:#87ceeb}
+#hud{position:fixed;left:8px;top:8px;background:rgba(0,0,0,0.45);color:#fff;padding:6px 10px;border-radius:6px;font-family:Arial}
+#ui{position:fixed;right:8px;top:8px;color:#fff}
+#startBtn{padding:6px 10px;margin-bottom:6px}
+#lap{background:rgba(0,0,0,0.45);padding:6px;border-radius:6px;margin-top:6px}
